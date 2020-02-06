@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Carousel
+            :carouselHeight="carouselHeight">
+      <div v-for="(v,k) in 20" ref="sss" style="line-height:40px;background: red;float: left">eeeeeeeeee{{v}}</div>
+    </Carousel>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      carouselHeight:0
+    }
+  },
+  mounted() {
+    // let i = 50;
+    // setInterval(()=>{
+    //   this.$refs.sss.style.height = i+"px";
+    //   this.carouselHeight = i+'px';
+    //   i += 50;
+    // },1000)
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+  background: aquamarine;
 }
 </style>

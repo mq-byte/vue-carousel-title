@@ -1,11 +1,12 @@
 {
-  "name": "vue-carousel",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-carousel-title",
+  "version": "0.0.2",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "buildLib": "vue-cli-service build --target lib --name carousel ./src/index.js"
   },
+  "main": "./dist/carousel.umd.js",
   "dependencies": {
     "core-js": "^3.4.4",
     "vue": "^2.6.10"
@@ -18,5 +19,13 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/QiuyangQ/vue-track-navigation-bar.git"
+  },
+  "keywords": [
+    "carousel"
+  ],
+  "author": "qiuyang"
 }
