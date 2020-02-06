@@ -1,12 +1,14 @@
 <template>
-  <div ref="carousel" class="carousel" :style="{maxWidth:maxWidth+'px'}">
+  <div ref="carousel" class="carousel" :class="{normal:normal}" :style="{maxWidth:maxWidth+'px',width:width+'px'}">
     <div
             :style="{lineHeight: carouselHeight?carouselHeight:arrowHeight}"
             @click="pre"
             class="pre arrow">
       &lt;
     </div>
-      <div class="content" ref="content" :style="{transform:`translateX(${positionX})`}"><slot></slot></div>
+      <div class="content" ref="content" :style="{transform:`translateX(${positionX})`}">
+        <slot></slot>
+      </div>
     <div @click="next" :style="{lineHeight: carouselHeight?carouselHeight:arrowHeight}" class="next arrow">&lt;</div>
   </div>
 </template>
@@ -18,7 +20,9 @@ export default {
     return {
       arrowHeight:'0px',
       positionX:'0px',
-      positionNum:0
+      positionNum:0,
+      normal:false,
+      width:0
     }
   },
   props:{
@@ -34,6 +38,19 @@ export default {
   },
   mounted() {
     this.arrowHeight = this.$refs.carousel.clientHeight + 'px';
+    this.normal = this.$refs.content.clientWidth < this.maxWidth;
+    this.width = this.$refs.content.clientWidth;
+
+    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+    console.log(MutationObserver);
+
+    let observer = new MutationObserver(()=>{
+      this.normal = this.$refs.content.clientWidth < this.maxWidth;
+      this.width = this.$refs.content.clientWidth;
+    });
+    console.log(this.$refs.content);
+    observer.observe(this.$refs.content,{attributes:true,subtree: true,childList:true});
   },
   methods:{
     pre(){
@@ -50,6 +67,9 @@ export default {
         this.positionNum = maxNum;
       }
       this.positionX = this.positionNum+"px"
+    },
+    resize(e){
+      console.log(e)
     }
   }
 }
@@ -59,8 +79,13 @@ export default {
   .carousel{
     padding: 0 20px;
     position: relative;
-    background: yellow;
     overflow: hidden;
+  }
+  .carousel.normal{
+    padding: 0;
+  }
+  .carousel.normal>.arrow{
+    display: none;
   }
   .arrow{
     position: absolute;
@@ -79,6 +104,8 @@ export default {
     direction: rtl
   }
   .content{
-    width: max-content
+    width: max-content;
+    overflow: hidden;
+    transition: .5s;
   }
 </style>

@@ -1,6 +1,6 @@
 {
   "name": "vue-carousel-title",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/QiuyangQ/vue-track-navigation-bar.git"
+    "url": "git@github.com:QiuyangQ/vue-carousel-title.git"
   },
   "keywords": [
     "carousel"

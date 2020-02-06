@@ -2,8 +2,10 @@
   <div id="app">
     <Carousel
             :carouselHeight="carouselHeight">
-      <div v-for="(v,k) in 20" ref="sss" style="line-height:40px;background: red;float: left">eeeeeeeeee{{v}}</div>
+      <div v-for="(v,k) in itemNum" ref="sss" style="line-height:40px;background: red;float: left;opacity: .5;">{{v}}eeeeeeeeee{{v}}</div>
     </Carousel>
+    <button @click="a">减少</button>
+    <button @click="b">增加</button>
   </div>
 </template>
 
@@ -13,8 +15,13 @@ export default {
   name: 'app',
   data(){
     return{
-      carouselHeight:0
+      carouselHeight:0,
+      itemNum:2
     }
+  },
+  methods:{
+    a(){this.itemNum--},
+    b(){this.itemNum++}
   },
   mounted() {
     // let i = 50;
