@@ -6,8 +6,12 @@
             class="pre arrow">
       &lt;
     </div>
-      <div class="content" ref="content" :style="{transform:`translateX(${positionX})`}">
-        <slot></slot>
+      <div class="content-box" :style="{padding:`0 ${padding}px`}">
+        <div style="overflow: hidden">
+          <div class="content" ref="content" :style="{transform:`translateX(${positionX})`}">
+            <slot></slot>
+          </div>
+        </div>
       </div>
     <div @click="next" :style="{lineHeight: carouselHeight?carouselHeight:arrowHeight}" class="next arrow">&lt;</div>
   </div>
@@ -34,6 +38,9 @@ export default {
     },
     step:{
       default: 350
+    },
+    padding:{
+      default:20,
     }
   },
   mounted() {
@@ -63,9 +70,10 @@ export default {
     next(){
       let maxNum = this.maxWidth - this.$refs.content.clientWidth;
       this.positionNum -= this.step;
-      if(this.positionNum<maxNum){
-        this.positionNum = maxNum;
+      if(this.positionNum<maxNum-this.padding*2){
+        this.positionNum = maxNum-this.padding*2;
       }
+      console.log(maxNum,this.positionNum);
       this.positionX = this.positionNum+"px"
     },
     resize(e){
@@ -101,11 +109,15 @@ export default {
   }
   .next{
     right: 0;
-    direction: rtl
+    direction: rtl;
   }
   .content{
     width: max-content;
     overflow: hidden;
     transition: .5s;
+  }
+  .content-box{
+    overflow: hidden;
+    /*background: white;*/
   }
 </style>
